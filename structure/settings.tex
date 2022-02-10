@@ -1,0 +1,102 @@
+% !TEX root = ../main.tex
+
+%----------------------------------------------------------------------------------------
+% PACKAGE CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+% Filename of the bibliography
+\addbibresource{structure/main.bib}
+
+% Margin settings
+\geometry{
+  paper=a4paper, % Paper format
+  inner=2.5cm, % Inner margin
+  outer=3.8cm, % Outer margin
+  bindingoffset=.5cm, % Binding offset
+  top=1.5cm, % Top margin
+  bottom=1.5cm, % Bottom margin
+  %showframe, % Uncomment to show how the type block is set on the page
+}
+
+% Figures location
+\graphicspath{{figures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg,.eps,.ps}
+
+
+% Custom P4 syntax hightlighting
+\lstdefinelanguage{P4}{
+    morekeywords={ struct, package, header, metadata, parser, transition, state, actions, action, table, key, control, extern, verif, if, else if, else, return, hit, miss, true, false, inout, in, out, exit, and, or, exact, ternary, lpm, range, valid, mask, match_kind },
+    emph={void, const, bool, varbit, bit, int, typedef, tuple, enum, apply },
+    sensitive=false, % keywords are not case-sensitive
+    morecomment=[l]{//}, % l is for line comment
+    morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+    morestring=[b]" % defines that strings are enclosed in double quotes
+}
+
+% P4 syntax hightlighting (use with \begin{P4})
+\lstnewenvironment{P4}{
+    \colorlet{p4gray}{black!30}
+    \colorlet{p4green}{green!60!blue}
+    \colorlet{p4key}{brown}
+    \colorlet{p4emph}{violet}
+    \colorlet{p4mauve}{red!60!blue}
+    \lstset{
+      backgroundcolor=\color{gray!10},
+      basicstyle=\ttfamily,
+      columns=fullflexible,
+      breakatwhitespace=false,
+      breaklines=true,
+      captionpos=b,
+      commentstyle=\color{p4green},
+      extendedchars=true,
+      frame=single,
+      keepspaces=true,
+      keywordstyle=\color{p4key},
+      emphstyle=\color{p4emph},
+      language=P4,
+      numbers=none, % line numbers (left, right or none)
+      numbersep=0,
+      numberstyle=\tiny\color{blue},
+      rulecolor=\color{p4gray},
+      showspaces=false,
+      showtabs=false,
+      stepnumber=1,
+      stringstyle=\color{p4mauve},
+      tabsize=3,
+      title=\lstname
+    }
+  }
+  {}
+
+% C++ syntax hightlighting (use with \begin{C++})
+\lstnewenvironment{C++}
+  {
+    \colorlet{cppgray}{black!30}
+    \colorlet{cppgreen}{green!60!blue}
+    \colorlet{cppmauve}{red!60!blue}
+    \lstset{
+      backgroundcolor=\color{gray!10},
+      basicstyle=\ttfamily,
+      columns=fullflexible,
+      breakatwhitespace=false,
+      breaklines=true,
+      captionpos=b,
+      commentstyle=\color{cppgreen},
+      extendedchars=true,
+      frame=single,
+      keepspaces=true,
+      keywordstyle=\color{blue},
+      language=c++,
+      numbers=none,
+      numbersep=5pt,
+      numberstyle=\tiny\color{blue},
+      rulecolor=\color{cppgray},
+      showspaces=false,
+      showtabs=false,
+      stepnumber=5,
+      stringstyle=\color{cppmauve},
+      tabsize=3,
+      title=\lstname
+    }
+  }
+  {}

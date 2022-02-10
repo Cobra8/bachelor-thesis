@@ -1,0 +1,29 @@
+% !TEX root = ../main.tex
+
+\chapter{Introduction}
+\label{ch:introduction}
+This work started with a first task of setting up the SOSD benchmark by \cite{sosd-neurips} with the premise in mind that learned index structures potentially can outperform traditional index structures. Part of this process would also be to recheck and verify the promised results on a local system. After comparable results to the original \cite{sosd-neurips} paper the idea of taking advantage of the benefits that learned index structures offer and fusing these with the now more and more establised network programmability offered by P4 became an essential goal of this work.
+
+\section{Motivation}
+A network device is usually very good and very fast at specific simple tasks. In other words it can treat an enourmous amount of packets in a very small amount of time. On the down side of things though it is limited in what operations it can offer and how complex a composition of them can get as well as the amount of memory that is at disposal. This becomes interesting when looking the fact that learned index structures tend to work in a way that they have a rather complex learning phase, where quite some time is spent on examining the data and its nature before then storing the gathered information in some form. The assumption is that the actual lookup then, due to the previous processing, should now be relatively simple and especially computationally cheap. Further learned index structures are often capable of adapting the amount of memory they consume depending on the requested prediction accuracy defined in the learning phase. This results in a memory to prediction accuracy tradeoff that could potentially be interesting for devices with limited memory capabilities. Another important aspect is that lately hardware acceleration through the efficient usage of secondary devices with some sort of computational power (like switches, NIC's, SSD drives, etc) has become a key aspect for making (distributed) systems faster. In terms of networks this was mainly allowed through a wider adoption of the P4 language.\\
+
+In general the motivation for this work is to potentially speed up all sorts of operations that require lookups on sorted data by allowing them to satisfy their requests directly through the network. With that in mind this work tries to explore the actual feasibility and possibilities that a suitable learned index structure could offer when implemented on a P4 capable network device.\pagebreak
+
+\section{Thesis structure}
+In chapter 2, an overview of what techniques and resources were used and tested is given, as well as which ones and why some of them where finally further pursued.\\
+
+\noindent
+In chapter 3, a potential implementation of a two-layer RMI on the synthetic BMv2 switch is proposed as well as an evaluation on how far away current physical switches are from what would be needed.\\
+
+\noindent
+In chapter 4, an adaptation of the reference RMI implementation by \cite{cdfshop} to be able to generate P4 source code files is presented.\\
+
+\noindent
+In chapter 5, some additional measurements are made and combined with hypothetical calculations of what switches are theoretically capable of doing today to try to get an approximate idae of how fruitful this work could be in the future.\\
+
+\noindent
+Finally in chapter 6 this thesis is closed by stating our conclusions and looking at potential future work.
+
+
+
+% In chapter 5, an approach of extending the capabilities of a network device to enable enhanced performance of the in chapter 3 proposed implementation on an actual physical device is discussed.\\

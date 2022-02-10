@@ -1,0 +1,168 @@
+% !TEX root = ../main.tex
+
+@article{sosd-vldb,
+  author    = {Ryan Marcus and
+               Andreas Kipf and
+               Alexander van Renen and
+               Mihail Stoian and
+               Sanchit Misra and
+               Alfons Kemper and
+               Thomas Neumann and
+               Tim Kraska},
+  title     = {Benchmarking Learned Indexes},
+  journal   = {Proc. {VLDB} Endow.},
+  volume    = {14},
+  number    = {1},
+  pages     = {1--13},
+  year      = {2020}
+}
+
+@article{sosd-neurips,
+  title={SOSD: A Benchmark for Learned Indexes},
+  author={Kipf, Andreas and Marcus, Ryan and van Renen, Alexander and Stoian, Mihail and Kemper, Alfons and Kraska, Tim and Neumann, Thomas},
+  journal={NeurIPS Workshop on Machine Learning for Systems},
+  year={2019}
+}
+
+
+@misc{p4-devday,
+  author = {Robert Soule, Stephen Ibanez, Carmelo Cascone, Brian O’Connor, Mina Tahmasbi, Samar Abdi},
+  title = {P4 Developer Day},
+  howpublished = "\url{https://www.youtube.com/watch?v=3DJeqS_dl_o&list=PLf7HGRMAlJBzGC58GcYpimyIs7D0nuSoo}",
+  year = {2017}
+}
+
+@misc{p4-langtut,
+  author = {P4Lang},
+  title = {P4 Tutorial},
+  howpublished = "\url{https://github.com/p4lang/tutorials}",
+  year = {2018}
+}
+
+@misc{p4-spec,
+  author = {{The P4 Language Consortium}},
+  title = {P4 Specification},
+  howpublished = "\url{https://p4.org/p4-spec/docs/P4-16-v1.2.2.html}",
+  year = {2021},
+  month = {05}
+}
+
+@misc{p4runtime-spec,
+  author = {{The P4 Language Consortium}},
+  title = {P4Runtime Specification},
+  howpublished = "\url{https://p4.org/p4-spec/p4runtime/v1.3.0/P4Runtime-Spec.html}",
+  year = {2020},
+  month = {12}
+}
+
+@inproceedings{rmi,
+  author = {Kraska, Tim and Beutel, Alex and Chi, Ed H. and Dean, Jeffrey and Polyzotis, Neoklis},
+  title = {The Case for Learned Index Structures},
+  year = {2018},
+  isbn = {9781450347037},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3183713.3196909},
+  doi = {10.1145/3183713.3196909},
+  abstract = {Indexes are models: a btree-Index can be seen as a model to map a key to the position
+  of a record within a sorted array, a Hash-Index as a model to map a key to a position
+  of a record within an unsorted array, and a BitMap-Index as a model to indicate if
+  a data record exists or not. In this exploratory research paper, we start from this
+  premise and posit that all existing index structures can be replaced with other types
+  of models, including deep-learning models, which we term em learned indexes. We theoretically
+  analyze under which conditions learned indexes outperform traditional index structures
+  and describe the main challenges in designing learned index structures. Our initial
+  results show that our learned indexes can have significant advantages over traditional
+  indexes. More importantly, we believe that the idea of replacing core components of
+  a data management system through learned models has far reaching implications for
+  future systems designs and that this work provides just a glimpse of what might be
+  possible.},
+  booktitle = {Proceedings of the 2018 International Conference on Management of Data},
+  pages = {489–504},
+  numpages = {16},
+  keywords = {index structures, b-tree, mixture of experts, learned index, cdf, linear regression, hash-map, neural net, learned data structures, bloom-filter, learned index structure},
+  location = {Houston, TX, USA},
+  series = {SIGMOD '18}
+}
+
+
+@inproceedings{cdfshop,
+  author = {Marcus, Ryan and Zhang, Emily and Kraska, Tim},
+  title = {CDFShop: Exploring and Optimizing Learned Index Structures},
+  year = {2020},
+  isbn = {9781450367356},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3318464.3384706},
+  doi = {10.1145/3318464.3384706},
+  abstract = {Indexes are a critical component of data management applications. While tree-like
+  structures (e.g., B-Trees) have been employed to great success, recent work suggests
+  that index structures powered by machine learning models (learned index structures)
+  can achieve low lookup times with a reduced memory footprint. This demonstration showcases
+  CDFShop, a tool to explore and optimize recursive model indexes (RMIs), a type of
+  learned index structure. This demonstration allows audience members to (1) gain an
+  intuition about various tuning parameters of RMIs and why learned index structures
+  can greatly accelerate search, and (2) understand how automatic optimization techniques
+  can be used to explore space/time tradeoffs within the space of RMIs.},
+  booktitle = {Proceedings of the 2020 ACM SIGMOD International Conference on Management of Data},
+  pages = {2789–2792},
+  numpages = {4},
+  keywords = {index, learned index structure, learned index},
+  location = {Portland, OR, USA},
+  series = {SIGMOD '20}
+}
+
+@inproceedings{radixspline,
+  author    = {Andreas Kipf and
+               Ryan Marcus and
+               Alexander van Renen and
+               Mihail Stoian and
+               Alfons Kemper and
+               Tim Kraska and
+               Thomas Neumann},
+  title     = {{RadixSpline}: a single-pass learned index},
+  booktitle = {Proceedings of the Third International Workshop on Exploiting Artificial
+               Intelligence Techniques for Data Management, aiDM@SIGMOD 2020, Portland,
+               Oregon, USA, June 19, 2020},
+  pages     = {5:1--5:5},
+  year      = {2020},
+  url       = {https://doi.org/10.1145/3401071.3401659},
+  doi       = {10.1145/3401071.3401659},
+  timestamp = {Mon, 08 Jun 2020 19:13:59 +0200},
+  biburl    = {https://dblp.org/rec/conf/sigmod/KipfMRSKK020.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{pgm,
+  Author = {Paolo Ferragina and Giorgio Vinciguerra},
+  Title = {The {PGM-index}: a fully-dynamic compressed learned index with provable worst-case bounds},
+  Year = {2020},
+  Volume = {13},
+  Number = {8},
+  Pages = {1162--1175},
+  Doi = {10.14778/3389133.3389135},
+  Url = {https://pgm.di.unipi.it},
+  Issn = {2150-8097},
+  Journal = {{PVLDB}}
+}
+
+@misc{bmv2,
+  author = {{The P4 Language Consortium}},
+  title = {The reference P4 software switch},
+  howpublished = "\url{https://github.com/p4lang/behavioral-model}",
+  year = {2020}
+}
+
+@misc{mininet,
+  author = {{Mininet Project Contributors}},
+  title = {Mininet},
+  howpublished = "\url{http://mininet.org/}",
+  year = {2021}
+}
+
+@misc{ieee754,
+  author = {IEEE},
+  title = {IEEE Standard for Floating-Point Arithmetic},
+  howpublished = "\url{https://standards.ieee.org/ieee/754/6210/}",
+  year = {2019}
+}

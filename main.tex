@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% eXascale Infolab thesis template -- Bachelor and Masters
+% version 1.1, Oct 2019
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Based on:
+% Masters/Doctoral Thesis
+% LaTeX Template Version 2.5 (27/8/17)
+% http://www.LaTeXTemplates.com
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,english,singlespacing,headsepline,consistentlayout]{structure/XI_thesis}
+
+%----------------------------------------------------------------------------------------
+%	LATEX PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font by default
+\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{array}          % custom sizes for table columns
+\usepackage{amssymb}        % extended blackboard math symbols
+\usepackage{amsmath}        % complete AMS math package
+% \usepackage[english]{babel} % spelling / syllabification
+\usepackage{algorithm}      % pseudocode float
+\usepackage[noend]{algpseudocode}  % pseudocode macros
+\usepackage{graphicx}       % include graphics
+\usepackage{epstopdf}       % vectorial graphics
+\usepackage{subcaption}     % sub captions
+\usepackage{url}            % URLs
+
+\usepackage{xcolor} % specify custom colours
+\usepackage{listings} % code syntax highlighting
+\usepackage{newtxmath} % greek symbols
+
+% Load package settings
+\input{structure/settings.tex}
+\input{structure/info.tex}
+
+\AtBeginDocument{
+  \hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+  \hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+  \hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+\frontmatter
+\pagestyle{plain}
+
+\input{structure/title.tex} % Title page definition
+% Include declaration page -- not necessary for Bachelor and Masters
+% \input{declaration.tex}
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+% Include only in the final submission, after the defense and all required corrections
+%\vspace*{0.2\textheight}
+%\noindent\enquote{\itshape Quote here}\bigbreak
+
+%----------------------------------------------------------------------------------------
+%   ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+\input{chapters/00-abstract}
+\vfill
+\begin{center}
+\textbf{Keywords:}~\keywordnames
+\end{center}
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES + TRANSITION PAGES
+%----------------------------------------------------------------------------------------
+\hypersetup{linkcolor=black}
+\tableofcontents % Prints the main table of contents
+\listoffigures % Prints the list of figures
+\mainmatter % Begin numeric (1,2,3...) page numbering
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+\include{chapters/01-introduction}
+\include{chapters/02-background}
+\include{chapters/03-rmionbmv2}
+\include{chapters/04-rmiforp4}
+\include{chapters/05-measurements}
+\include{chapters/06-conclusions}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+\printbibliography[heading=bibintoc]
+
+%----------------------------------------------------------------------------------------
+%   APPENDIX
+%----------------------------------------------------------------------------------------
+\include{chapters/09-appendix}
+
+%----------------------------------------------------------------------------------------
+\end{document}
