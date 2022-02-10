@@ -18,8 +18,6 @@
 %----------------------------------------------------------------------------------------
 %	LATEX PACKAGES
 %----------------------------------------------------------------------------------------
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% DO NOT EDIT
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage{mathpazo} % Use the Palatino font by default
@@ -36,23 +34,15 @@
 \usepackage{epstopdf}       % vectorial graphics
 \usepackage{subcaption}     % sub captions
 \usepackage{url}            % URLs
-%%%%%%%%%%%%%%%%%%%%%%%%%%% DO NOT EDIT - end
 
-% Define path and extensions for your graphics
-\graphicspath{{figures/}}%{{../jpeg/} [...]}
-\DeclareGraphicsExtensions{.pdf,.jpg,.jpeg,.png,eps}
-
-
-%% User packages
-% \usepackage{add here}
-% Include your package settings in `structure/settings.tex`
-
+\usepackage{xcolor} % specify custom colours
+\usepackage{listings} % code syntax highlighting
+\usepackage{newtxmath} % greek symbols
 
 % Load package settings
 \input{structure/settings.tex}
-% Load custom thesis information (remember to fill in)
 \input{structure/info.tex}
-% Set title, author and keywords on the compiled PDF
+
 \AtBeginDocument{
   \hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
   \hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
@@ -63,8 +53,8 @@
 \begin{document}
 \frontmatter
 \pagestyle{plain}
-% Title page definition
-\input{structure/title.tex}
+
+\input{structure/title.tex} % Title page definition
 % Include declaration page -- not necessary for Bachelor and Masters
 % \input{declaration.tex}
 \cleardoublepage
@@ -73,23 +63,20 @@
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
 % Include only in the final submission, after the defense and all required corrections
-
 %\vspace*{0.2\textheight}
 %\noindent\enquote{\itshape Quote here}\bigbreak
-
 
 %----------------------------------------------------------------------------------------
 %   ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-\input{chapters/abstract}
+\input{chapters/00-abstract}
 \vfill
 \begin{center}
 \textbf{Keywords:}~\keywordnames
 \end{center}
 \end{abstract}
-
 
 %----------------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES + TRANSITION PAGES
@@ -100,32 +87,25 @@
 \mainmatter % Begin numeric (1,2,3...) page numbering
 \pagestyle{thesis} % Return the page headers back to the "thesis" style
 
-
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
-
-% Include here the chapters of the thesis
-% Comment/uncomment the lines to find bugs and compile faster during writing
-\include{structure/template_intro} % comment this out
-% \include{chapters/introduction}
-% \include{chapters/ ...}
-% \include{chapters/conclusions}
-
+\include{chapters/01-introduction}
+\include{chapters/02-background}
+\include{chapters/03-rmionbmv2}
+\include{chapters/04-rmiforp4}
+\include{chapters/05-measurements}
+\include{chapters/06-conclusions}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \printbibliography[heading=bibintoc]
 
-
 %----------------------------------------------------------------------------------------
 %   APPENDIX
 %----------------------------------------------------------------------------------------
-% Rarely required, only if extra material particularly voluminous
-% \include{chapters/appendix}
-
+\include{chapters/09-appendix}
 
 %----------------------------------------------------------------------------------------
 \end{document}
-% That's all folks
