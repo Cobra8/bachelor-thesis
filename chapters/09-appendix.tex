@@ -146,7 +146,7 @@ control FloatingMultiplier(in double_t first, in double_t second, out double_t r
   }
 }\end{P4}
 
-\subsection{P4 floating point normalzation}
+\subsection{Normalization}
 \label{sect:appendix:floating_normalization}
 
 \begin{P4}
@@ -249,3 +249,38 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
     f_clamp(fpred, 0xbebc1ff, guess); // 0xbebc1ff = 199999999
   }
 }\end{P4}
+
+\section{Measurement results using cold caches and memory fencing}
+\label{sect:appendix:measurements}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/books_200M_uint64}
+  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
+    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  }
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/fb_200M_uint64}
+  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
+    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  }
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/osm_cellids_200M_uint64}
+  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
+    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  }
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/wiki_ts_200M_uint64}
+  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
+    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  }
+\end{figure}
