@@ -250,37 +250,76 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   }
 }\end{P4}
 
+\newpage % ugly, but otherwise latex does not place section title correctly
+
 \section{Measurement results using cold caches and memory fencing}
 \label{sect:appendix:measurements}
 
-\begin{figure}[ht]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/books_200M_uint64}
-  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
-    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  \caption*{
+    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
   }
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/fb_200M_uint64}
-  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
-    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  \caption*{
+    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
   }
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/osm_cellids_200M_uint64}
-  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
-    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  \caption*{
+    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
   }
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/wiki_ts_200M_uint64}
-  \caption[Lookup and last mile search time measures using cold caches and memory fencing]{
-    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset differentiating between pure lookup time and last mile search time \emph{using} cold caches and memory fencing.
+  \caption*{
+    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
+  }
+\end{figure}
+
+\newpage % ugly, but otherwise latex does not place section title correctly
+
+\section{Measurement results calculating pure lookup time as the difference of the total time measured and last mile search time}
+\label{sect:appendix:measurements-no-lookup}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/books_200M_uint64-no-lookup}
+  \caption*{
+    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
+  }
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/fb_200M_uint64-no-lookup}
+  \caption*{
+    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
+  }
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/osm_cellids_200M_uint64-no-lookup}
+  \caption*{
+    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{without using} cold caches and memory, fencing trying to approximate pure lookup time by subtracting last mile search time.
+  }
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1\textwidth]{measurements/wiki_ts_200M_uint64-no-lookup}
+  \caption*{
+    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
   }
 \end{figure}
