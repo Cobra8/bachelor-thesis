@@ -10,11 +10,11 @@
 
 \begin{C++}
 namespace books_200M_uint32_0 {
-const double L0_PARAMETER0 = 0.0;
-const double L0_PARAMETER1 = 0.0;
-const double L0_PARAMETER2 = 0.003906249768078851;
-const double L0_PARAMETER3 = 0.0;
-char* L1_PARAMETERS;
+  const double L0_PARAMETER0 = 0.0;
+  const double L0_PARAMETER1 = 0.0;
+  const double L0_PARAMETER2 = 0.003906249768078851;
+  const double L0_PARAMETER3 = 0.0;
+  char* L1_PARAMETERS;
 }\end{C++}
 
 \subsection{Code file (Lookup code)}
@@ -171,7 +171,7 @@ control FloatingNormalizer(inout overflow128_t overflow) {
       NoAction;
     }
     const default_action = NoAction();
-    const entries =  { // value to match against && bit mask
+    const entries =  { // value to match against &&& bit mask
       0b1000...0 &&& 0b100...0: floating_shift_right(overflow, 75);
       0b0100...0 &&& 0b110...0: floating_shift_right(overflow, 74);
       0b0010...0 &&& 0b111...0: floating_shift_right(overflow, 73);
@@ -189,10 +189,23 @@ control FloatingNormalizer(inout overflow128_t overflow) {
   }
 }\end{P4}
 
+\subsection{FMA}
+\label{sect:appendix:fma}
 
-\section{Loading model parameters in P4}
+\begin{P4}
+control FloatingFusedMultiplyAdd(in double_t x, in double_t y, in double_t z, out double_t result) {
+  FloatingAdder() adder_instance;
+  FloatingMultiplier() multiplier_instance;
 
-\subsection{Dataplane RMI table definition}
+  apply {
+    multiplier_instance.apply(x, y, result);
+    adder_instance.apply(result, z, result);
+  }
+}\end{P4}
+
+\section{Loading model parameters}
+
+\subsection{Data plane RMI table declaration in P4}
 \label{sect:appendix:rmi_table}
 
 \begin{P4}
@@ -215,7 +228,7 @@ control ModelLookup(in uint64_t model_index, out double_t first_l1, out double_t
           NoAction;
       }
       const default_action = assign_variables(0, 0, 0, 0, 0, 0, 0);
-      const size = 550000;
+      const size = 550000; // depends on model parameter size
   }
   apply {
       assign_variables(0, 0, 0, 0, 0, 0, 0);
@@ -223,7 +236,49 @@ control ModelLookup(in uint64_t model_index, out double_t first_l1, out double_t
   }
 }\end{P4}
 
-\section{RMI lookup code in P4}
+\subsection{Control plane batch sending of model parameters in Python}
+\label{sect:appendix:sending_params}
+
+\begin{python}
+BATCH_SIZE = 2048
+
+SIGN_MASK = 0x8000000000000000
+EXPONENT_MASK = 0x7FF0000000000000
+MANTISSA_MASK = 0x000FFFFFFFFFFFFF
+
+def writeL1Parameters(p4info_helper, switch):
+  if not os.path.exists('path/to/layer_parameters'): print('Parameters file not found!'); return
+  model_index = 0
+  with open('path/to/layer_parameters', 'rb') as file:
+    bytes = file.read(24 * BATCH_SIZE)
+    while bytes:
+      entries_batch = []
+      for index in range(0, BATCH_SIZE):
+        model_bytes = bytes[(24 * index):(24 * (index + 1))]
+        first_l1 = int.from_bytes(model_bytes[0:8], byteorder='little')
+        second_l1 = int.from_bytes(model_bytes[8:16], byteorder='little')
+        third_l1 = int.from_bytes(model_bytes[16:24], byteorder='little')
+
+        table_entry = p4info_helper.buildTableEntry(
+          table_name='LearnedIngress.lookup_instance.l1_lookup.l1_model_lookup',
+          match_fields={ 'model_index': model_index },
+          action_name='LearnedIngress.lookup_instance.l1_lookup.assign_variables',
+          action_params={
+            'first_l1_sign': (first_l1 & SIGN_MASK) >> 63,
+            'first_l1_exponent': (first_l1 & EXPONENT_MASK) >> 52,
+            'first_l1_mantissa': first_l1 & MANTISSA_MASK,
+            'second_l1_sign': (second_l1 & SIGN_MASK) >> 63,
+            'second_l1_exponent': (second_l1 & EXPONENT_MASK) >> 52,
+            'second_l1_mantissa': second_l1 & MANTISSA_MASK,
+            'third_l1_input': third_l1
+          })
+        entries_batch.append(table_entry)
+        model_index += 1
+
+      switch.WriteTableEntries(entries_batch)
+      bytes = file.read(24 * BATCH_SIZE)\end{python}
+
+\section{RMI lookup fuction in P4}
 \label{sect:appendix:rmi_lookup}
 
 \begin{P4}
@@ -237,24 +292,26 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   double_t first_l1; double_t second_l1;
 
   apply {
+    // 1. using static L0 parameters as input for the first cubic model layer
     cubic_instance.apply({ 0, 0, 0 }, { 0, 0, 0 }, { 0, 1014, 4503599092596736 }, { 0, 0, 0 }, input_key, fpred);
     double_to_int(fpred, model_index);
 
-    // retrieving L1 parameters
-    lookup_instance.apply(model_index, first_l1, second_l1, guess_err);
+    lookup_instance.apply(model_index, first_l1, second_l1, guess_err); // 2. retrieving L1 parameters
 
+    // 3. using retrieved L1 parameters as input for second linear model layer
     linear_instance.apply(first_l1, second_l1, input_key, fpred);
     double_to_int(fpred, guess);
 
-    f_clamp(fpred, 0xbebc1ff, guess); // 0xbebc1ff = 199999999
+    f_clamp(fpred, 0xbebc1ff, guess);
   }
 }\end{P4}
 
 \newpage % ugly, but otherwise latex does not place section title correctly
 
-\section{Measurement results using cold caches and memory fencing}
+\section{Experiment results using cold caches and memory fencing}
 \label{sect:appendix:measurements}
 
+\captionsetup[figure]{skip=10pt} % move caption down
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/books_200M_uint64}
@@ -289,9 +346,10 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
 
 \newpage % ugly, but otherwise latex does not place section title correctly
 
-\section{Measurement results calculating pure lookup time as the difference of the total time measured and last mile search time}
+\section{Experiment results calculating pure lookup time as the difference of the total time measured and last mile search time}
 \label{sect:appendix:measurements-no-lookup}
 
+\captionsetup[figure]{skip=10pt} % move caption down
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1\textwidth]{measurements/books_200M_uint64-no-lookup}

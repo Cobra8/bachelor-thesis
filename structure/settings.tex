@@ -35,70 +35,114 @@
     morestring=[b]" % defines that strings are enclosed in double quotes
 }
 
-% P4 syntax hightlighting (use with \begin{P4})
+% P4 syntax hightlighting (use with \begin{P4} or \begin{lstlisting}[style=P4])
+\colorlet{p4gray}{black!30}
+\colorlet{p4green}{green!60!blue}
+\colorlet{p4key}{brown}
+\colorlet{p4emph}{violet}
+\colorlet{p4mauve}{red!60!blue}
+\lstdefinestyle{P4}{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\tiny\ttfamily,
+    columns=fullflexible,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{p4green},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{p4key},
+    emphstyle=\color{p4emph},
+    language=P4,
+    numbers=none, % line numbers (left, right or none)
+    numbersep=0,
+    numberstyle=\tiny\color{blue},
+    rulecolor=\color{p4gray},
+    showspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    stringstyle=\color{p4mauve},
+    tabsize=3,
+    title=\lstname
+}
+
 \lstnewenvironment{P4}{
-    \colorlet{p4gray}{black!30}
-    \colorlet{p4green}{green!60!blue}
-    \colorlet{p4key}{brown}
-    \colorlet{p4emph}{violet}
-    \colorlet{p4mauve}{red!60!blue}
-    \lstset{
-      backgroundcolor=\color{gray!10},
-      basicstyle=\ttfamily,
-      columns=fullflexible,
-      breakatwhitespace=false,
-      breaklines=true,
-      captionpos=b,
-      commentstyle=\color{p4green},
-      extendedchars=true,
-      frame=single,
-      keepspaces=true,
-      keywordstyle=\color{p4key},
-      emphstyle=\color{p4emph},
-      language=P4,
-      numbers=none, % line numbers (left, right or none)
-      numbersep=0,
-      numberstyle=\tiny\color{blue},
-      rulecolor=\color{p4gray},
-      showspaces=false,
-      showtabs=false,
-      stepnumber=1,
-      stringstyle=\color{p4mauve},
-      tabsize=3,
-      title=\lstname
-    }
+    \lstset{style=P4}
   }
   {}
 
-% C++ syntax hightlighting (use with \begin{C++})
-\lstnewenvironment{C++}
-  {
-    \colorlet{cppgray}{black!30}
-    \colorlet{cppgreen}{green!60!blue}
-    \colorlet{cppmauve}{red!60!blue}
+% C++ syntax hightlighting (use with \begin{C++} or \begin{lstlisting}[style=C++])
+\colorlet{cppgray}{black!30}
+\colorlet{cppgreen}{green!60!blue}
+\colorlet{cppmauve}{red!60!blue}
+\lstdefinestyle{C++}{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\tiny\ttfamily,
+    columns=fullflexible,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{cppgreen},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{blue},
+    language=c++,
+    numbers=none,
+    numbersep=5pt,
+    numberstyle=\tiny\color{blue},
+    rulecolor=\color{cppgray},
+    showspaces=false,
+    showtabs=false,
+    stepnumber=5,
+    stringstyle=\color{cppmauve},
+    tabsize=3,
+    title=\lstname
+}
+
+\lstnewenvironment{C++}{
+    \lstset{style=C++}
+  }
+  {}
+
+% Python syntax hightlighting (use with \begin{python} or \begin{lstlisting}[style=python])
+\definecolor{pythonblue}{rgb}{0,0,0.5}
+\definecolor{pythonred}{rgb}{0.6,0,0}
+\definecolor{pythongreen}{rgb}{0,0.5,0}
+\colorlet{pythongray}{black!30}
+\lstdefinestyle{python}{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\tiny\ttfamily,
+    columns=fullflexible,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{pythongray},
+    extendedchars=true,
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{pythonblue},
+    morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},
+    language=python,
+    numbers=none,
+    numbersep=5pt,
+    numberstyle=\tiny\color{pythonred},
+    rulecolor=\color{pythongray},
+    showspaces=false,
+    showtabs=false,
+    stepnumber=5,
+    stringstyle=\color{pythongreen},
+    showstringspaces=false,
+    tabsize=3,
+    title=\lstname
+}
+
+\lstnewenvironment{python}{
     \lstset{
-      backgroundcolor=\color{gray!10},
-      basicstyle=\ttfamily,
-      columns=fullflexible,
-      breakatwhitespace=false,
-      breaklines=true,
-      captionpos=b,
-      commentstyle=\color{cppgreen},
-      extendedchars=true,
-      frame=single,
-      keepspaces=true,
-      keywordstyle=\color{blue},
-      language=c++,
-      numbers=none,
-      numbersep=5pt,
-      numberstyle=\tiny\color{blue},
-      rulecolor=\color{cppgray},
-      showspaces=false,
-      showtabs=false,
-      stepnumber=5,
-      stringstyle=\color{cppmauve},
-      tabsize=3,
-      title=\lstname
+      style=python,
+      emph={BATCH_SIZE,SIGN_MASK,EXPONENT_MASK,MANTISSA_MASK},
+      emphstyle=\color{pythonred},
     }
   }
   {}
