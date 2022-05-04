@@ -67,12 +67,9 @@ uint64_t lookup(uint64_t key, size_t* err) {
   *err = *((uint64_t*) (L1_PARAMETERS + (modelIndex * 24) + 16));
 
   return FCLAMP(fpred, 200000000.0 - 1.0);
-}
-}\end{C++}
-
+} }\end{C++}
 
 \section{FMA operation in P4}
-\label{sect:appendix:fma}
 
 \subsection{Addition}
 \label{sect:appendix:floating_addition}
@@ -279,7 +276,6 @@ def writeL1Parameters(p4info_helper, switch):
       bytes = file.read(24 * BATCH_SIZE)\end{python}
 
 \section{RMI lookup fuction in P4}
-\label{sect:appendix:rmi_lookup}
 
 \begin{P4}
 control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t guess_err) {
@@ -316,7 +312,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/books_200M_uint64}
   \caption*{
-    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
+    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last-mile search time.
   }
 \end{figure}
 
@@ -324,7 +320,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/fb_200M_uint64}
   \caption*{
-    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
+    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last-mile search time.
   }
 \end{figure}
 
@@ -332,7 +328,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/osm_cellids_200M_uint64}
   \caption*{
-    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
+    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last-mile search time.
   }
 \end{figure}
 
@@ -340,13 +336,13 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/wiki_ts_200M_uint64}
   \caption*{
-    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last mile search time.
+    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{using} cold caches and memory fencing, differentiating between pure lookup time and last-mile search time.
   }
 \end{figure}
 
 \newpage % ugly, but otherwise latex does not place section title correctly
 
-\section{Experiment results calculating pure lookup time as the difference of the total time measured and last mile search time}
+\section{Experiment results calculating pure lookup time as the difference of the total time measured and last-mile search time}
 \label{sect:appendix:measurements-no-lookup}
 
 \captionsetup[figure]{skip=10pt} % move caption down
@@ -354,7 +350,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/books_200M_uint64-no-lookup}
   \caption*{
-    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
+    Running the SOSD benchmark on the \emph{books\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last-mile search time from the totally measured time.
   }
 \end{figure}
 
@@ -362,7 +358,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/fb_200M_uint64-no-lookup}
   \caption*{
-    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
+    Running the SOSD benchmark on the \emph{fb\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last-mile search time from the totally measured time.
   }
 \end{figure}
 
@@ -370,7 +366,7 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/osm_cellids_200M_uint64-no-lookup}
   \caption*{
-    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{without using} cold caches and memory, fencing trying to approximate pure lookup time by subtracting last mile search time.
+    Running the SOSD benchmark on the \emph{osm\_cellids\_200M\_uint64} dataset \emph{without using} cold caches and memory, fencing trying to approximate pure lookup time by subtracting last-mile search time.
   }
 \end{figure}
 
@@ -378,6 +374,6 @@ control LearnedLookup(in double_t input_key, out uint64_t guess, out uint64_t gu
   \centering
   \includegraphics[width=1\textwidth]{measurements/wiki_ts_200M_uint64-no-lookup}
   \caption*{
-    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last mile search time from the totally measured time.
+    Running the SOSD benchmark on the \emph{wiki\_ts\_200M\_uint64} dataset \emph{without using} cold caches and memory fencing, trying to approximate pure lookup time by subtracting last-mile search time from the totally measured time.
   }
 \end{figure}
